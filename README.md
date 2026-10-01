@@ -4,7 +4,7 @@ Filter your Mailchimp audience in Google Sheets and turn the results into a Mail
 
 Mailchimp Sheets Tagger is a Google Apps Script that adds a **Mailchimp** menu to any Google Sheet. It pulls your Mailchimp audience into the sheet, lets your team filter it with ordinary spreadsheet filters (by location, any custom field, or standardized skills and interests), and then tags the filtered contacts in Mailchimp with one click. Anyone creating a campaign in Mailchimp can then send it to that tag.
 
-It was built for teams that need targeted lists often but don't want to learn Mailchimp's segment builder or juggle CSV exports and imports, such as volunteer organizations, member associations, and nonprofits.
+It was built for teams that need targeted lists often but don't want a more advanced Mailchimp's segment builder or juggle CSV exports and imports, such as volunteer organizations, member associations, and nonprofits.
 
 > **Not affiliated with or endorsed by Intuit Mailchimp.** Mailchimp is a trademark of Intuit Inc.
 
@@ -15,7 +15,7 @@ It was built for teams that need targeted lists often but don't want to learn Ma
 - **Setup wizard.** An admin connects the sheet to Mailchimp in three prompt boxes: API key, audience, fields. No code editing.
 - **Live audience data.** One click loads every contact (subscribed, unsubscribed, cleaned, pending) with a Status column.
 - **Choose your columns.** A Settings tab lists every Mailchimp field and signup-form checkbox group; tick the ones you want in the sheet.
-- **Skill and keyword standardization.** List skills and their alternative spellings in a Skills tab. The tool scans free-text and checkbox fields and adds a tidy *Skills (standardized)* column plus one checkbox column per skill, so "ESRI", "ArcMap", and "arcgis pro" all count as the same skill.
+- **Keyword standardization.** List keywords and their alternative spellings in a Keyword tab. The tool scans free-text and checkbox fields and adds a tidy *Keywords (standardized)* column plus one checkbox column per keyword, so "Google Sheets", "GSheets", and "Google Docs" all count as the same keyword.
 - **Tag what you see.** Filter or hide rows, then tag every visible contact. Tags are added in batches of 500, existing tags can be reused, and every run is logged.
 - **Subscribed-only tagging (default).** Unsubscribed and bounced contacts are skipped, so tag counts match what Mailchimp shows when you send a campaign.
 - **Safe refresh.** Data loads into a temporary tab that replaces the old one only when complete, so a failed refresh never leaves you with a half-empty sheet.
@@ -64,7 +64,7 @@ This lets the tool read which rows are hidden in a single call. Without it, tagg
 ### 4. Configure
 
 - On the **Settings** tab, untick **Include** for fields you don't want as columns, and tick **Scan for skills** for fields where people describe their skills or interests.
-- Optionally fill in the **Skills** tab (see [Skills](#skills)).
+- Optionally fill in the **Keywords** tab (see [Keywords](#keywords)).
 - Run **Mailchimp → 1. Refresh member data**.
 
 ## Usage
@@ -101,19 +101,19 @@ Running Setup again keeps your existing choices and adds any new Mailchimp field
 
 **Address fields** appear as City, State, Zip, and Country columns. Street lines are deliberately left out to keep less personal data in the sheet.
 
-## Skills
+## Keywords
 
-The **Skills** tab is optional. Each row defines one skill:
+The **Keywords** tab is optional. Each row defines one skill:
 
-| Category | Skill | Aliases (comma-separated) |
+| Category | Keywords | Aliases (comma-separated) |
 |---|---|---|
-| Software | ArcGIS | arcgis pro, arcmap, esri, agol |
-| Software | QGIS | quantum gis |
-| Development | Python | arcpy, geopandas, pandas |
+| Software | Google Sheets | gsheets, Google Docs |
+| Software | Office | Office 365, Excel, Microsoft Office |
+| Development | Python | py, pandas |
 | Languages | Spanish | español, espanol, castellano |
 
-- A contact gets a skill when its name or any alias appears in a field ticked **Scan for skills**, or in a checkbox option they selected.
-- Matching is case-insensitive and whole-word, so `r` won't match "carrots", and spaces are flexible, so "arc gis" matches "arcgis".
+- A contact gets a keyword when its name or any alias appears in a field ticked **Scan for keywords**, or in a checkbox option they selected.
+- Matching is case-insensitive and whole-word, so `r` won't match "carrots", and spaces are flexible, so "Office 365" matches "Office365".
 - Checkbox options that match no skill are listed as-is, so the standardized column includes everything a contact selected.
 - Each skill becomes a checkbox column, colored by category. Filter a column to `TRUE`, or sort it, to find everyone with that skill.
 - Leave the tab empty to turn skill standardization off.
@@ -151,10 +151,8 @@ Issues and pull requests are welcome. Please don't include API keys, audience ID
 
 ## License
 
-[MIT](LICENSE) © 2026 Rob Carroll
+[MIT](LICENSE) © 2026 Sixty Carlton
 
 ## Acknowledgements
-
-Originally built for [GISCorps](https://www.giscorps.org/) to help its volunteer coordinators quickly find and contact volunteers by location and skill.
 
 The concept, design, and requirements for this tool are my own. AI tools (Anthropic's Claude) assisted with code development, testing, and documentation.
