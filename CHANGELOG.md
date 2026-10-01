@@ -8,7 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 - **Minor** (1.1.0): new features that work with existing sheets
 - **Patch** (1.0.1): bug fixes
 
-## [Unreleased]
+## Unreleased
 
 ## [1.0.0] - 2026-10-01
 
