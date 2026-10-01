@@ -2,7 +2,7 @@
 
 Filter your Mailchimp audience in Google Sheets and turn the results into a Mailchimp tag, ready to send a campaign.
 
-Mailchimp Sheets Tagger is a Google Apps Script that adds a **Mailchimp** menu to any Google Sheet. It pulls your Mailchimp audience into the sheet, lets your team filter it with ordinary spreadsheet filters (by location, any custom field, or standardized skills and interests), and then tags the filtered contacts in Mailchimp with one click. Anyone creating a campaign in Mailchimp can then send it to that tag.
+Mailchimp Sheets Tagger is a Google Apps Script that adds a **Mailchimp** menu to any Google Sheet. It pulls your Mailchimp audience into the sheet, lets your team filter it with ordinary spreadsheet filters (by location, any custom field, or standardized keywords and interests), and then tags the filtered contacts in Mailchimp with one click. Anyone creating a campaign in Mailchimp can then send it to that tag.
 
 It was built for teams that need targeted lists often but don't want a more advanced Mailchimp's segment builder or juggle CSV exports and imports, such as volunteer organizations, member associations, and nonprofits.
 
@@ -15,7 +15,7 @@ It was built for teams that need targeted lists often but don't want a more adva
 - **Setup wizard.** An admin connects the sheet to Mailchimp in three prompt boxes: API key, audience, fields. No code editing.
 - **Live audience data.** One click loads every contact (subscribed, unsubscribed, cleaned, pending) with a Status column.
 - **Choose your columns.** A Settings tab lists every Mailchimp field and signup-form checkbox group; tick the ones you want in the sheet.
-- **Keyword standardization.** List keywords and their alternative spellings in a Keyword tab. The tool scans free-text and checkbox fields and adds a tidy *Keywords (standardized)* column plus one checkbox column per keyword, so "Google Sheets", "GSheets", and "Google Docs" all count as the same keyword.
+- **Keyword standardization.** List keywords and their alternative spellings in a Keyword tab. The tool scans free-text and checkbox fields and adds a tidy *Keyword (standardized)* column plus one checkbox column per keyword, so "Google Sheets", "GSheets", and "Google Docs" all count as the same keyword.
 - **Tag what you see.** Filter or hide rows, then tag every visible contact. Tags are added in batches of 500, existing tags can be reused, and every run is logged.
 - **Subscribed-only tagging (default).** Unsubscribed and bounced contacts are skipped, so tag counts match what Mailchimp shows when you send a campaign.
 - **Safe refresh.** Data loads into a temporary tab that replaces the old one only when complete, so a failed refresh never leaves you with a half-empty sheet.
@@ -42,7 +42,7 @@ The tool only ever **reads** contact data and **adds tags**. It never creates co
 
 1. Create a new Google Sheet.
 2. Go to **Extensions → Apps Script**.
-3. Delete the sample code in `Code.gs` and paste in the contents of [`Mailchimp_Tagger.gs`](Mailchimp_Tagger.gs).
+3. Delete the sample code in `Code.gs` and paste in the contents of [`Mailchimp_Tagger_Generic.gs`](Mailchimp_Tagger_Generic.gs).
 4. Click **Save**. Optionally rename the project (top left) to *Mailchimp Tagger*.
 
 ### 2. Enable the Google Sheets API service (recommended)
@@ -59,7 +59,7 @@ This lets the tool read which rows are hidden in a single call. Without it, tagg
 4. Follow the three steps:
    - **API key:** in Mailchimp, go to *Profile → Extras → API keys → Create A Key*, then paste it. The wizard checks it with Mailchimp before saving.
    - **Audience:** chosen automatically if you have one; otherwise pick from a numbered list.
-   - **Fields:** the wizard creates the **Settings** and **Skills** tabs.
+   - **Fields:** the wizard creates the **Settings** and **Keywords** tabs.
 
 ### 4. Configure
 
@@ -82,7 +82,7 @@ This lets the tool read which rows are hidden in a single call. Without it, tagg
 
 1. **Refresh member data.** Progress appears in the bottom-right corner.
 2. **Clear all filters**, then filter the Members tab with the buttons in the header row. For example, *Country* = `US` and the *Python* skill column = `TRUE`. Right-click → **Hide row** to leave out individuals.
-3. **Tag visible rows**, and enter a tag name. Starting with the date keeps tags organized, e.g. `2026-10 Python volunteers`.
+3. **Tag visible rows**, and enter a tag name. Starting with the date keeps tags organized, e.g. `2026-10 Python programmers`.
 4. In Mailchimp, create a campaign and choose the tag under **Segment or Tag**.
 
 Contacts Mailchimp can't match are listed on the **Mailchimp log** tab, along with who ran each tagging job and when.
@@ -103,7 +103,7 @@ Running Setup again keeps your existing choices and adds any new Mailchimp field
 
 ## Keywords
 
-The **Keywords** tab is optional. Each row defines one skill:
+The **Keywords** tab is optional. Each row defines one keyword:
 
 | Category | Keywords | Aliases (comma-separated) |
 |---|---|---|
